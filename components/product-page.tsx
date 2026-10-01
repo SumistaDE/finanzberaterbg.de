@@ -22,6 +22,7 @@ const copy = {
     manualNote:
       'Nach dem Kauf senden wir Ihnen das Handbuch automatisch per E-Mail zu.',
     orderNote: 'Nach dem Kauf senden wir Ihnen eine Bestellbestaetigung per E-Mail.',
+    bundleLink: 'Alle 3 Teile als Komplettset (294 EUR)',
     secure: 'Sichere Zahlung ueber Mollie',
     errorEmail: 'Bitte geben Sie eine gueltige E-Mail-Adresse ein.',
     errorPayment:
@@ -42,6 +43,7 @@ const copy = {
     manualNote:
       'След покупката изпращаме наръчника автоматично на Вашия имейл.',
     orderNote: 'След покупката изпращаме потвърждение на поръчката на Вашия имейл.',
+    bundleLink: 'И трите части като комплект (294 €)',
     secure: 'Сигурно плащане чрез Mollie',
     errorEmail: 'Моля, въведете валиден имейл адрес.',
     errorPayment: 'Плащането не можа да стартира. Моля, опитайте отново.',
@@ -139,9 +141,17 @@ export function ProductPage({
                 </form>
 
                 <p className="buy-note">
-                  {product.manualPath ? t.manualNote : t.orderNote}
+                  {product.manualFile ? t.manualNote : t.orderNote}
                 </p>
                 <p className="buy-secure">🔒 {t.secure}</p>
+
+                {product.slug.startsWith('naruchnik-teil-') && (
+                  <p className="buy-bundle">
+                    <Link href="/produkt/naruchnik-komplett">
+                      {t.bundleLink} <span>↗</span>
+                    </Link>
+                  </p>
+                )}
               </div>
             </aside>
           </div>

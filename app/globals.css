@@ -68,6 +68,8 @@ em { font-family: var(--serif); font-weight: 400; }
 .full { width: 100%; justify-content: center; }
 .buy-note { margin: 20px 0 0; color: #78847b; font-size: 12px; line-height: 1.7; }
 .buy-secure { margin: 14px 0 0; color: #78847b; font-size: 11px; }
+.buy-bundle { margin: 16px 0 0; padding-top: 16px; border-top: 1px solid #e2e7e0; font-size: 12px; }
+.buy-bundle a { color: var(--ink); text-decoration: underline; }
 .buy-error { margin: 0 0 16px; border: 1px solid #e0b4b4; background: #fbf1f1; color: #a4483f; padding: 10px 12px; border-radius: 2px; font-size: 12px; }
 
 /* Thank-you page */

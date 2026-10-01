@@ -29,10 +29,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 The site sells its services through Mollie. The catalog lives in
 `lib/products.ts` and is listed on `/dienstleistungen`:
 
-| Service | Price | PDF manual |
+| Service | Price | Document |
 |---|---|---|
-| Tarifanalyse und Optimierung (Finanzberaterbg.de) | 49 EUR | no |
-| Tarifanalyse mit Optimierung, Planung und Smart-Meter-Vermittlung | 198 EUR | yes |
+| Tarifanalyse und Optimierung (Finanzberaterbg.de) | 49 EUR | none |
+| Tarifanalyse mit Optimierung, Planung und Smart-Meter-Vermittlung | 198 EUR | PDF manual |
+| Handbuch "Weniger zahlen fuer Strom und Gas" - Teil 1 | 98 EUR | PDF (5 pages) |
+| Handbuch "Weniger zahlen fuer Strom und Gas" - Teil 2 | 98 EUR | PDF (4 pages) |
+| Handbuch "Weniger zahlen fuer Strom und Gas" - Teil 3 | 98 EUR | PDF (5 pages) |
+| Handbuch "Weniger zahlen fuer Strom und Gas" - Komplettset | 294 EUR | PDF (14 pages) |
+
+The handbook was split into three parts so each can be sold separately at
+98 EUR. The Komplettset sells all three at once.
 
 Flow:
 
@@ -58,12 +65,15 @@ Environment Variables (production):
 | `RESEND_API_KEY` | Resend key for emailing the PDF manual |
 | `MAIL_FROM` | Verified sender address for the manual email |
 
-### The PDF manual
+### The PDF documents
 
-Put the manual at `public/downloads/tarifberater24-handbuch.pdf`. It is:
+Sellable PDFs live in `private/downloads/` - **not** in `public/`, so they are
+never reachable by a direct link. They are served only by
+`/api/download?payment=tr_...` after the payment status is confirmed as paid,
+and are attached to the confirmation email straight from disk.
 
-- downloadable after a confirmed payment via `/api/download?payment=tr_...`, and
-- attached to the confirmation email sent through Resend.
+To add or replace a document, drop the file into `private/downloads/` and set
+`manualFile` (the bare filename) on the product in `lib/products.ts`.
 
 ### Webhooks
 

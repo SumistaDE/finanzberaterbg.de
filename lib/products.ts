@@ -17,7 +17,7 @@ export type Product = {
   featuresBg: string[]
   provider: string
   // Only services that ship a PDF have a manual; others get a plain confirmation email.
-  manualPath?: string
+  manualFile?: string
   manualLabel?: string
   accent: string
 }
@@ -83,8 +83,124 @@ export const products: Product[] = [
       'Наръчник като PDF, изпратен автоматично след покупка',
     ],
     provider: 'Tarifberater24',
-    manualPath: '/downloads/tarifberater24-handbuch.pdf',
+    manualFile: 'tarifberater24-handbuch.pdf',
     manualLabel: 'Handbuch zur Tarifanalyse & Smart-Meter (PDF)',
+    accent: '#c8f45b',
+  },
+  {
+    id: 'naruchnik-teil-1',
+    slug: 'naruchnik-teil-1',
+    price: '98.00',
+    name: 'Handbuch "Weniger zahlen fuer Strom und Gas" - Teil 1',
+    nameBg: 'Наръчник „Плащай по-малко за ток и газ" — Част 1',
+    tagline: 'Die Rechnung lesen und Tarife richtig vergleichen',
+    taglineBg: 'Как да четеш сметката и да сравняваш тарифите правилно',
+    description:
+      'Teil 1 des praktischen Handbuchs fuer Bulgaren in Deutschland: die Bestandteile Ihrer Rechnung verstehen und Tarife systematisch vergleichen.',
+    descriptionBg:
+      'Част 1 от практичния наръчник за българи в Германия: как да разбирате съставките на сметката си и как систематично да сравнявате тарифите.',
+    features: [
+      'Einfuehrung: so nutzen Sie das Handbuch',
+      'Kapitel 01: die eigene Rechnung lesen',
+      'Kapitel 02: Tarife vergleichen, Schritt fuer Schritt',
+      'Verstaendlich auf Bulgarisch, mit konkreten Beispielen',
+    ],
+    featuresBg: [
+      'Въведение: как да използвате наръчника',
+      'Глава 01: Как да четеш сметката си',
+      'Глава 02: Как да сравняваш тарифи',
+      'Разбираемо обяснено, с конкретни примери',
+    ],
+    provider: 'Tarifberater24',
+    manualFile: 'naruchnik-tok-gaz-teil-1.pdf',
+    manualLabel: 'Naruchnik Teil 1 (PDF)',
+    accent: '#c8f45b',
+  },
+  {
+    id: 'naruchnik-teil-2',
+    slug: 'naruchnik-teil-2',
+    price: '98.00',
+    name: 'Handbuch "Weniger zahlen fuer Strom und Gas" - Teil 2',
+    nameBg: 'Наръчник „Плащай по-малко за ток и газ" — Част 2',
+    tagline: 'Vertrag, Boni und Fallen - Strom und Heizung',
+    taglineBg: 'Договорът, бонусите и капаните — ток и отопление',
+    description:
+      'Teil 2 des Handbuchs: worauf Sie vor der Unterschrift achten, wie Sie Boni und Fallen durchschauen und wo Strom und Heizung am meisten kosten.',
+    descriptionBg:
+      'Част 2 от наръчника: на какво да обърнете внимание преди подпис, как да разчетете бонусите и капаните и къде токът и отоплението струват най-много.',
+    features: [
+      'Kapitel 03: der Vertrag - was Sie pruefen sollten',
+      'Kapitel 04: Boni und Fallen erkennen',
+      'Kapitel 05: Strom zu Hause - Verbrauch und Sparpotenzial',
+      'Kapitel 06: Heizung und Gas - der groesste Sparhebel',
+    ],
+    featuresBg: [
+      'Глава 03: Договорът — какво да провериш',
+      'Глава 04: Бонуси и капани',
+      'Глава 05: Токът у дома — потребление и икономия',
+      'Глава 06: Отопление и газ — най-големият резервоар за икономия',
+    ],
+    provider: 'Tarifberater24',
+    manualFile: 'naruchnik-tok-gaz-teil-2.pdf',
+    manualLabel: 'Naruchnik Teil 2 (PDF)',
+    accent: '#c8f45b',
+  },
+  {
+    id: 'naruchnik-teil-3',
+    slug: 'naruchnik-teil-3',
+    price: '98.00',
+    name: 'Handbuch "Weniger zahlen fuer Strom und Gas" - Teil 3',
+    nameBg: 'Наръчник „Плащай по-малко за ток и газ" — Част 3',
+    tagline: 'Berechnungen, Aktionsplan und typische Fehler',
+    taglineBg: 'Изчисления, план за действие и типични грешки',
+    description:
+      'Teil 3 des Handbuchs: Beispielrechnungen, ein 12-Monats-Plan, die 10 haeufigsten Fehler und schnelle Antworten auf die wichtigsten Fragen.',
+    descriptionBg:
+      'Част 3 от наръчника: примерни изчисления, 12-месечен план за действие, 10-те най-чести грешки и бързи отговори на важните въпроси.',
+    features: [
+      'Kapitel 07: Beispielrechnungen',
+      'Kapitel 08: 12-Monats-Aktionsplan',
+      'Kapitel 09: die 10 typischen Fehler',
+      'Kapitel 10: schnelle Antworten auf haeufige Fragen',
+    ],
+    featuresBg: [
+      'Глава 07: Примерни изчисления',
+      'Глава 08: 12-месечен план за действие',
+      'Глава 09: 10 типични грешки',
+      'Глава 10: Бързи отговори',
+    ],
+    provider: 'Tarifberater24',
+    manualFile: 'naruchnik-tok-gaz-teil-3.pdf',
+    manualLabel: 'Naruchnik Teil 3 (PDF)',
+    accent: '#c8f45b',
+  },
+  {
+    id: 'naruchnik-komplett',
+    slug: 'naruchnik-komplett',
+    price: '294.00',
+    name: 'Handbuch "Weniger zahlen fuer Strom und Gas" - Komplettset (alle 3 Teile)',
+    nameBg: 'Наръчник „Плащай по-малко за ток и газ" — Пълен комплект (3 части)',
+    tagline: 'Alle drei Teile auf einmal - der vollstaendige Praxisleitfaden',
+    taglineBg: 'И трите части наведнъж — пълното практическо ръководство',
+    description:
+      'Der vollstaendige Praxisleitfaden fuer Bulgaren in Deutschland: Rechnungen verstehen, Tarife vergleichen, Vertraege pruefen, Boni durchschauen und dauerhaft sparen.',
+    descriptionBg:
+      'Пълното практическо ръководство за българи в Германия: разбиране на сметките, сравняване на тарифи, проверка на договори, разчитане на бонуси и трайно спестяване.',
+    features: [
+      'Alle 10 Kapitel in einem Dokument (14 Seiten)',
+      'Teil 1: Rechnung lesen und Tarife vergleichen',
+      'Teil 2: Vertrag, Boni, Fallen, Strom und Heizung',
+      'Teil 3: Berechnungen, Aktionsplan und typische Fehler',
+    ],
+    featuresBg: [
+      'Всичките 10 глави в един документ (14 страници)',
+      'Част 1: Сметката и сравняване на тарифи',
+      'Част 2: Договор, бонуси, капани, ток и отопление',
+      'Част 3: Изчисления, план за действие и грешки',
+    ],
+    provider: 'Tarifberater24',
+    manualFile: 'naruchnik-tok-gaz-germania.pdf',
+    manualLabel: 'Naruchnik Komplett (PDF)',
     accent: '#c8f45b',
   },
 ]
