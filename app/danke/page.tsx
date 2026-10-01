@@ -3,6 +3,8 @@
 import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { Footer, Header } from '@/components/site-chrome'
+import { useLang } from '@/lib/i18n'
 
 type OrderStatus = {
   id: string
@@ -36,9 +38,30 @@ const copy = {
     back: 'Zurueck zur Startseite',
     retry: 'Erneut versuchen',
   },
+  bg: {
+    loadingTitle: 'Проверяваме Вашето плащане ...',
+    loadingText: 'Момент, моля — потвърждаваме статуса в Mollie.',
+    paidTitle: 'Благодарим Ви за плащането!',
+    paidText:
+      'Плащането е потвърдено. Наръчникът като PDF вече е изпратен на Вашия имейл.',
+    paidTextNoDoc:
+      'Плащането е потвърдено. Ще се свържем с Вас по имейл със следващите стъпки.',
+    pendingTitle: 'Плащането все още се обработва',
+    pendingText:
+      'Щом Mollie потвърди плащането, ще Ви изпратим наръчника автоматично по имейл. Можете да отворите тази страница отново по-късно.',
+    failedTitle: 'Плащането не беше завършено',
+    failedText: 'Можете да опитате отново.',
+    ref: 'Референция',
+    method: 'Начин на плащане',
+    amount: 'Сума',
+    download: 'Изтеглете наръчника като PDF',
+    downloadHint: 'Изтеглянето е достъпно само след потвърдено плащане.',
+    back: 'Обратно към началото',
+    retry: 'Опитайте отново',
+  },
 }
 
-function statusLabel(status: string, t: typeof copy.de) {
+function statusLabel(status: string, t: (typeof copy)['de']) {
   if (status === 'paid' || status === 'authorized') return t.paidTitle
   if (status === 'failed' || status === 'canceled' || status === 'expired')
     return t.failedTitle
@@ -48,7 +71,8 @@ function statusLabel(status: string, t: typeof copy.de) {
 function ThankYou() {
   const params = useSearchParams()
   const paymentId = params.get('payment') || ''
-  const t = copy.de
+  const { lang } = useLang()
+  const t = copy[lang]
   const [order, setOrder] = useState<OrderStatus | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -89,7 +113,9 @@ function ThankYou() {
         : t.pendingText
 
   return (
-    <section className="thankyou">
+    <>
+      <Header />
+      <section className="thankyou">
       <div className="container thankyou-inner">
         <div className={`thankyou-card ${isPaid ? 'is-paid' : ''}`}>
           <div className="thankyou-icon">{isPaid ? '✓' : loading ? '⏳' : '•'}</div>
@@ -152,6 +178,8 @@ function ThankYou() {
         </div>
       </div>
     </section>
+      <Footer />
+    </>
   )
 }
 

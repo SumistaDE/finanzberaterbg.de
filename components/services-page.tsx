@@ -1,10 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { products } from '@/lib/products'
-
-type Lang = 'de' | 'bg'
+import { Footer, Header } from '@/components/site-chrome'
+import { useLang } from '@/lib/i18n'
 
 function formatPrice(value: string) {
   return new Intl.NumberFormat('de-DE', {
@@ -51,31 +50,12 @@ const copy = {
 }
 
 export function ServicesPage() {
-  const [lang, setLang] = useState<Lang>('de')
+  const { lang } = useLang()
   const t = copy[lang]
 
   return (
     <>
-      <header className="site-header">
-        <div className="container nav-inner">
-          <Link href="/" className="brand">
-            <span className="brand-mark">f</span>
-            <span>
-              Finanzberater<span className="brand-accent"> BG</span>
-            </span>
-          </Link>
-          <nav className="desktop-nav">
-            <Link href="/">{t.home}</Link>
-            <Link href="/#kontakt">{t.nav[2]}</Link>
-            <button
-              className="language-switch"
-              onClick={() => setLang(lang === 'de' ? 'bg' : 'de')}
-            >
-              {lang.toUpperCase()} <span>/</span> {t.toggle}
-            </button>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="subpage">
         <div className="container">
@@ -106,12 +86,7 @@ export function ServicesPage() {
         </div>
       </main>
 
-      <footer className="footer">
-        <div className="container footer-bottom">
-          <span>© 2024 Finanzberater BG</span>
-          <span>Made for better decisions.</span>
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }
