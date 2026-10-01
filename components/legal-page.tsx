@@ -17,11 +17,13 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
             <>
               Tarifberater24
               <br />
-              [Rechtsform, z. B. Einzelunternehmen oder GmbH]
+              Inhaber: Svetlozarov Gitsov
               <br />
-              [Strasse und Hausnummer ergaenzen]
+              Rechtsform: Gewerbe
               <br />
-              [PLZ und Ort ergaenzen]
+              Hospitalstr. 30
+              <br />
+              66798 Wallerfangen
               <br />
               Deutschland
               <br />
@@ -37,21 +39,18 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
               E-Mail:{' '}
               <a href="mailto:info@finanzberaterbg.de">info@finanzberaterbg.de</a>
               <br />
-              Telefon: [Telefonnummer ergaenzen]
+              Telefon:{' '}
+              <a href="tel:+4915750171967">+49 1575 0171967</a>
             </>
           ),
         },
         {
-          heading: 'Vertreten durch',
-          body: <>[Vor- und Nachname der vertretungsberechtigten Person ergaenzen]</>,
-        },
-        {
-          heading: 'Umsatzsteuer-ID',
+          heading: 'Umsatzsteuer',
           body: (
             <>
-              Umsatzsteuer-Identifikationsnummer gemaess § 27 a Umsatzsteuergesetz:
-              <br />
-              [USt-IdNr. ergaenzen, falls vorhanden]
+              Als Kleinunternehmer im Sinne des § 19 UStG wird keine Umsatzsteuer
+              berechnet und daher nicht ausgewiesen. Eine Umsatzsteuer-Identifikationsnummer
+              liegt nicht vor.
             </>
           ),
         },
@@ -72,11 +71,13 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
             <>
               Tarifberater24
               <br />
-              [Правна форма — напр. едноличен търговец или GmbH]
+              Собственик: Светлозаров Гицов
               <br />
-              [Улица и номер]
+              Правна форма: Gewerbe (регистрирана търговска дейност)
               <br />
-              [Пощенски код и град]
+              Hospitalstr. 30
+              <br />
+              66798 Wallerfangen
               <br />
               Германия
               <br />
@@ -92,21 +93,18 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
               Имейл:{' '}
               <a href="mailto:info@finanzberaterbg.de">info@finanzberaterbg.de</a>
               <br />
-              Телефон: [добавете телефонен номер]
+              Телефон:{' '}
+              <a href="tel:+4915750171967">+49 1575 0171967</a>
             </>
           ),
         },
         {
-          heading: 'Представлявано от',
-          body: <>[Име и фамилия на представляващото лице]</>,
-        },
-        {
-          heading: 'ДДС номер',
+          heading: 'ДДС',
           body: (
             <>
-              Идентификационен номер по ДДС съгласно § 27 a от германския закон за ДДС:
-              <br />
-              [добавете ДДС номер, ако имате]
+              Като малък предприемач по § 19 от германския закон за ДДС (UStG) не се
+              начислява ДДС и затова не се посочва. Идентификационен номер по ДДС не е
+              наличен.
             </>
           ),
         },
@@ -383,11 +381,6 @@ export function LegalPage({ slug }: { slug: string }) {
                 <p>{s.body}</p>
               </section>
             ))}
-            <p className="legal-note">
-              {lang === 'de'
-                ? 'Hinweis: Die mit [ ] markierten Angaben sind vor dem produktiven Einsatz zu ergaenzen.'
-                : 'Забележка: Данните в [ ] трябва да бъдат попълнени преди публикуване.'}
-            </p>
             <Link className="text-link" href="/">
               {lang === 'de' ? 'Zurueck zur Startseite' : 'Начало'}{' '}
               <span>↗</span>
