@@ -3,7 +3,7 @@
 //
 // Required env vars to actually send mail:
 //   RESEND_API_KEY - your Resend API key
-//   MAIL_FROM      - verified sender, e.g. "Tarifberater24 <info@tarifberater24.de>"
+//   MAIL_FROM      - verified sender, e.g. "Tarifberater24 <info@finanzberaterbg.de>"
 //   BASE_URL       - public base URL, used for the re-download link in the email
 //
 // If they are missing we log and skip, so payments still work without mail configured.
@@ -52,7 +52,7 @@ export async function sendManualEmail(params: {
       naechsten Schritten. Sie muessen nichts weiter tun.</p>`
       }
       <p>Bei Fragen erreichen Sie uns von Montag bis Freitag, 9:00-18:00 Uhr,
-      unter info@tarifberater24.de.</p>
+      unter info@finanzberaterbg.de.</p>
       <p>Ihr Tarifberater24 Team</p>
     </div>`
 
