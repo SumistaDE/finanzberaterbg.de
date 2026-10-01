@@ -28,22 +28,36 @@ export async function sendManualEmail(params: {
     return { sent: false, skipped: true }
   }
 
-  const pdfUrl = `${baseUrl}${product.manualPath}`
-  const subject = `Ihr Handbuch: ${product.name}`
+  const pdfUrl = product.manualPath ? `${baseUrl}${product.manualPath}` : null
+  const subject = pdfUrl
+    ? `Ihr Handbuch: ${product.name}`
+    : `Ihre Bestellung: ${product.name}`
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#17251f;line-height:1.6">
       <h2 style="margin:0 0 12px">Vielen Dank fuer Ihren Kauf!</h2>
       <p>Ihre Zahlung fuer <strong>${product.name}</strong> ist bei uns eingegangen
       (Referenz: ${paymentId}).</p>
-      <p>Im Anhang finden Sie Ihr vollstaendiges Handbuch als PDF. Es begleitet Sie
+      ${
+        pdfUrl
+          ? `<p>Im Anhang finden Sie Ihr vollstaendiges Handbuch als PDF. Es begleitet Sie
       Schritt fuer Schritt durch die Tarifanalyse, die Optimierung Ihrer Vertraege und
       die Inbetriebnahme Ihres Smart-Meter-Geraets.</p>
       <p>Sie koennen das Handbuch jederzeit hier erneut herunterladen:<br/>
-      <a href="${pdfUrl}">${pdfUrl}</a></p>
+      <a href="${pdfUrl}">${pdfUrl}</a></p>`
+          : `<p>Wir haben Ihre Bestellung erhalten und melden uns in Kuerze mit den
+      naechsten Schritten. Sie muessen nichts weiter tun.</p>`
+      }
       <p>Bei Fragen erreichen Sie uns von Montag bis Freitag, 9:00-18:00 Uhr,
       unter info@tarifberater24.de.</p>
       <p>Ihr Tarifberater24 Team</p>
     </div>`
+
+  const body: Record<string, unknown> = { from, to, subject, html }
+  if (pdfUrl) {
+    body.attachments = [
+      { filename: 'Tarifberater24-Handbuch.pdf', path: pdfUrl },
+    ]
+  }
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
@@ -52,13 +66,7 @@ export async function sendManualEmail(params: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from,
-        to,
-        subject,
-        html,
-        attachments: [{ filename: 'Tarifberater24-Handbuch.pdf', path: pdfUrl }],
-      }),
+      body: JSON.stringify(body),
     })
 
     if (!res.ok) {

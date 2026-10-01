@@ -1,5 +1,10 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import type { Product } from '@/lib/products'
+
+type Lang = 'de' | 'bg'
 
 const copy = {
   de: {
@@ -7,14 +12,16 @@ const copy = {
     login: 'Anmelden',
     toggle: 'BG',
     back: 'Zurueck',
-    eyebrow: 'PREMIUM LEISTUNG',
+    eyebrow: 'DIENSTLEISTUNG',
     price: 'Einmalig',
     buy: 'Jetzt kaufen',
-    emailLabel: 'Ihre E-Mail-Adresse (fuer das Handbuch)',
+    emailLabel: 'Ihre E-Mail-Adresse',
     emailPlaceholder: 'name@beispiel.de',
     included: 'Enthalten',
+    provider: 'Anbieter',
     manualNote:
-      'Nach dem Kauf senden wir Ihnen das vollstaendige Handbuch als PDF automatisch per E-Mail zu.',
+      'Nach dem Kauf senden wir Ihnen das Handbuch automatisch per E-Mail zu.',
+    orderNote: 'Nach dem Kauf senden wir Ihnen eine Bestellbestaetigung per E-Mail.',
     secure: 'Sichere Zahlung ueber Mollie',
     errorEmail: 'Bitte geben Sie eine gueltige E-Mail-Adresse ein.',
     errorPayment:
@@ -25,14 +32,16 @@ const copy = {
     login: 'Вход',
     toggle: 'DE',
     back: 'Назад',
-    eyebrow: 'ПРЕМИУМ УСЛУГА',
+    eyebrow: 'УСЛУГА',
     price: 'Еднократно',
     buy: 'Купи сега',
-    emailLabel: 'Вашият имейл (за наръчника)',
+    emailLabel: 'Вашият имейл адрес',
     emailPlaceholder: 'name@example.com',
     included: 'Включено',
+    provider: 'Доставчик',
     manualNote:
-      'След покупката изпращаме пълния наръчник като PDF автоматично на Вашия имейл.',
+      'След покупката изпращаме наръчника автоматично на Вашия имейл.',
+    orderNote: 'След покупката изпращаме потвърждение на поръчката на Вашия имейл.',
     secure: 'Сигурно плащане чрез Mollie',
     errorEmail: 'Моля, въведете валиден имейл адрес.',
     errorPayment: 'Плащането не можа да стартира. Моля, опитайте отново.',
@@ -46,7 +55,13 @@ export function ProductPage({
   product: Product
   error?: string
 }) {
-  const t = copy.de
+  const [lang, setLang] = useState<Lang>('de')
+  const t = copy[lang]
+
+  const name = lang === 'de' ? product.name : product.nameBg
+  const tagline = lang === 'de' ? product.tagline : product.taglineBg
+  const description = lang === 'de' ? product.description : product.descriptionBg
+  const features = lang === 'de' ? product.features : product.featuresBg
   const priceLabel = new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -65,6 +80,12 @@ export function ProductPage({
           <nav className="desktop-nav">
             <Link href="/">{t.back}</Link>
             <Link href="/#kontakt">{t.nav[2]}</Link>
+            <button
+              className="language-switch"
+              onClick={() => setLang(lang === 'de' ? 'bg' : 'de')}
+            >
+              {lang.toUpperCase()} <span>/</span> {t.toggle}
+            </button>
           </nav>
         </div>
       </header>
@@ -74,18 +95,23 @@ export function ProductPage({
           <p className="eyebrow">{t.eyebrow}</p>
           <div className="product-layout">
             <div className="product-main">
-              <h1>{product.name}</h1>
-              <p className="product-lead">{product.description}</p>
+              <h1>{name}</h1>
+              <p className="product-tagline">{tagline}</p>
+              <p className="product-lead">{description}</p>
 
               <h2 className="product-subhead">{t.included}</h2>
               <ul className="product-features">
-                {product.features.map((f) => (
+                {features.map((f) => (
                   <li key={f}>
                     <span className="tick">✓</span>
                     {f}
                   </li>
                 ))}
               </ul>
+
+              <p className="product-provider">
+                {t.provider}: <strong>{product.provider}</strong>
+              </p>
             </div>
 
             <aside className="product-buy">
@@ -112,7 +138,9 @@ export function ProductPage({
                   </button>
                 </form>
 
-                <p className="buy-note">{t.manualNote}</p>
+                <p className="buy-note">
+                  {product.manualPath ? t.manualNote : t.orderNote}
+                </p>
                 <p className="buy-secure">🔒 {t.secure}</p>
               </div>
             </aside>

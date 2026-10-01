@@ -24,10 +24,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Shop: Tarifanalyse & Smart-Meter (Mollie)
+## Shop: services (Mollie)
 
-The site sells the service **"Tarifanalyse mit Optimierung, Planung und
-Smart-Meter-Vermittlung"** for **198 EUR** through Mollie.
+The site sells its services through Mollie. The catalog lives in
+`lib/products.ts` and is listed on `/dienstleistungen`:
+
+| Service | Price | PDF manual |
+|---|---|---|
+| Tarifanalyse und Optimierung (Finanzberaterbg.de) | 49 EUR | no |
+| Tarifanalyse mit Optimierung, Planung und Smart-Meter-Vermittlung | 198 EUR | yes |
 
 Flow:
 
