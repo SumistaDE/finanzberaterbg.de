@@ -6,6 +6,15 @@ import { products } from '@/lib/products'
 
 type Lang = 'de' | 'bg'
 
+function formatPrice(value: string) {
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(Number(value))
+}
+
 const copy = {
   de: {
     nav: ['Dienstleistungen', 'Vorteile', 'Kontakt'],
@@ -16,6 +25,7 @@ const copy = {
     intro:
       'Waehlen Sie eine Leistung. Jede wird von unseren Experten persoenlich begleitet.',
     view: 'Details ansehen',
+    priceLabel: 'Einmalig',
     footerLead: <>Ihre Energie. Ihre Entscheidung.</>,
     navigation: 'Navigation',
     contact: 'Kontakt',
@@ -31,6 +41,7 @@ const copy = {
     intro:
       'Изберете услуга. Всяка се съпровожда лично от нашите експерти.',
     view: 'Вижте детайли',
+    priceLabel: 'Еднократно',
     footerLead: <>Вашата енергия. Вашето решение.</>,
     navigation: 'Навигация',
     contact: 'Контакт',
@@ -84,6 +95,10 @@ export function ServicesPage() {
                 <span>{String(i + 1).padStart(2, '0')}</span>
                 <h2>{lang === 'de' ? product.name : product.nameBg}</h2>
                 <p>{lang === 'de' ? product.tagline : product.taglineBg}</p>
+                <span className="service-price">
+                  {formatPrice(product.price)}
+                  <small>{t.priceLabel}</small>
+                </span>
                 <span className="row-arrow">↗</span>
               </Link>
             ))}
