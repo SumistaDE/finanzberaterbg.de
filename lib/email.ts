@@ -3,7 +3,7 @@
 //
 // Required env vars to actually send mail:
 //   RESEND_API_KEY - your Resend API key
-//   MAIL_FROM      - verified sender, e.g. "Tarifberater24 <info@finanzberaterbg.de>"
+//   MAIL_FROM      - verified sender, e.g. "Finanzberater BG <info@finanzberaterbg.de>"
 //   BASE_URL       - public base URL, used for the re-download link in the email
 //
 // If they are missing we log and skip, so payments still work without mail configured.
@@ -53,7 +53,7 @@ export async function sendManualEmail(params: {
       }
       <p>Bei Fragen erreichen Sie uns von Montag bis Freitag, 9:00-18:00 Uhr,
       unter info@finanzberaterbg.de.</p>
-      <p>Ihr Tarifberater24 Team</p>
+      <p>Ihr Finanzberater BG Team</p>
     </div>`
 
   const body: Record<string, unknown> = { from, to, subject, html }

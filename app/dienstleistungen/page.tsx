@@ -1,7 +1,7 @@
 import ServicesPage from '@/components/services-page'
 
 export const metadata = {
-  title: 'Dienstleistungen | Tarifberater24',
+  title: 'Dienstleistungen | Finanzberater BG',
   description:
     'Tarifanalyse, Optimierung und Smart-Meter-Vermittlung fuer Strom und Gas.',
 }

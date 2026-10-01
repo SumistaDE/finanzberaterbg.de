@@ -59,9 +59,9 @@ export function ServicesPage() {
       <header className="site-header">
         <div className="container nav-inner">
           <Link href="/" className="brand">
-            <span className="brand-mark">t</span>
+            <span className="brand-mark">f</span>
             <span>
-              Tarifberater<span className="brand-accent">24</span>
+              Finanzberater<span className="brand-accent"> BG</span>
             </span>
           </Link>
           <nav className="desktop-nav">
@@ -108,7 +108,7 @@ export function ServicesPage() {
 
       <footer className="footer">
         <div className="container footer-bottom">
-          <span>© 2024 Tarifberater24</span>
+          <span>© 2024 Finanzberater BG</span>
           <span>Made for better decisions.</span>
         </div>
       </footer>
