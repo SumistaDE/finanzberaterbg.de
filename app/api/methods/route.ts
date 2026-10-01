@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server'
+export async function GET(request: Request) { const amount = new URL(request.url).searchParams.get('amount') || '1.00'; const response = await fetch(`https://api.mollie.com/v2/methods?amount[currency]=${process.env.CURRENCY || 'EUR'}&amount[value]=${encodeURIComponent(amount)}`, { headers: { Authorization: `Bearer ${process.env.MOLLIE_API_KEY}` } }); if (!response.ok) return NextResponse.json({ error: 'Unable to load payment methods' }, { status: response.status }); return NextResponse.json(await response.json()) }
