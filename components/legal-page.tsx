@@ -15,15 +15,18 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
           heading: 'Angaben gemaess § 5 DDG',
           body: (
             <>
-              Finanzberater BG
+              Tarifberater24
               <br />
-              [Vollstaendiger Firmenname ergaenzen]
+              [Rechtsform, z. B. Einzelunternehmen oder GmbH]
               <br />
               [Strasse und Hausnummer ergaenzen]
               <br />
               [PLZ und Ort ergaenzen]
               <br />
               Deutschland
+              <br />
+              <br />
+              Handelsname / Marke: Finanzberater BG (finanzberaterbg.de)
             </>
           ),
         },
@@ -67,15 +70,18 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
           heading: 'Данни по § 5 DDG (германски закон)',
           body: (
             <>
-              Finanzberater BG
+              Tarifberater24
               <br />
-              [Пълно фирмено наименование]
+              [Правна форма — напр. едноличен търговец или GmbH]
               <br />
               [Улица и номер]
               <br />
               [Пощенски код и град]
               <br />
               Германия
+              <br />
+              <br />
+              Търговско име / марка: Finanzberater BG (finanzberaterbg.de)
             </>
           ),
         },
@@ -124,8 +130,8 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
           heading: 'Verantwortlicher',
           body: (
             <>
-              Verantwortlich fuer die Datenverarbeitung auf dieser Website ist
-              Finanzberater BG, erreichbar unter{' '}
+              Verantwortlich fuer die Datenverarbeitung auf dieser Website ist die
+              Tarifberater24 (Marke: Finanzberater BG), erreichbar unter{' '}
               <a href="mailto:info@finanzberaterbg.de">info@finanzberaterbg.de</a>.
             </>
           ),
@@ -178,7 +184,8 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
           heading: 'Администратор на лични данни',
           body: (
             <>
-              Администратор на личните данни в този сайт е Finanzberater BG, връзка:{' '}
+              Администратор на личните данни в този сайт е Tarifberater24 (марка:
+              Finanzberater BG), връзка:{' '}
               <a href="mailto:info@finanzberaterbg.de">info@finanzberaterbg.de</a>.
             </>
           ),
@@ -237,7 +244,8 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
           body: (
             <>
               Diese Bedingungen gelten fuer alle Bestellungen von digitalen Inhalten und
-              Beratungsleistungen ueber die Website finanzberaterbg.de.
+              Beratungsleistungen ueber die Website finanzberaterbg.de. Anbieter ist
+              Tarifberater24 (Marke: Finanzberater BG).
             </>
           ),
         },
@@ -296,7 +304,8 @@ const pages: Record<string, { title: Record<Lang, string>; sections: Record<Lang
           body: (
             <>
               Тези условия се прилагат за всички поръчки на цифрово съдържание и
-              консултантски услуги чрез сайта finanzberaterbg.de.
+              консултантски услуги чрез сайта finanzberaterbg.de. Доставчик е
+              Tarifberater24 (марка: Finanzberater BG).
             </>
           ),
         },
