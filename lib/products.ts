@@ -72,7 +72,7 @@ export const products: Product[] = [
       'Vermittlung und Lieferung eines Smart-Meter-Geraets',
       'Montage an der Hauptsicherung des Stromzaehlers',
       'Echtzeit-Monitoring und Kontrolle des Verbrauchs',
-      'Handbuch als PDF, nach dem Kauf automatisch per E-Mail',
+      'Individueller Optimierungsplan, nach dem Kauf per E-Mail',
     ],
     featuresBg: [
       'Пълен тарифен анализ на договорите Ви за ток и газ',
@@ -80,11 +80,9 @@ export const products: Product[] = [
       'Посредничество и доставка на Smart-Meter устройство',
       'Монтаж на главния бушон на електромера',
       'Мониторинг и контрол на потреблението в реално време',
-      'Наръчник като PDF, изпратен автоматично след покупка',
+      'Индивидуален план за оптимизация, изпратен по имейл след покупка',
     ],
     provider: 'Tarifberater24',
-    manualFile: 'tarifberater24-handbuch.pdf',
-    manualLabel: 'Handbuch zur Tarifanalyse & Smart-Meter (PDF)',
     accent: '#c8f45b',
   },
   {

@@ -33,6 +33,8 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    const product = metadata.productId ? getProduct(metadata.productId) : null
+
     return NextResponse.json({
       id: payment.id,
       status: payment.status,
@@ -41,6 +43,7 @@ export async function GET(req: NextRequest) {
       paidAt: payment.paidAt || null,
       email: metadata.email || null,
       productId: metadata.productId || null,
+      hasDownload: Boolean(product?.manualFile),
     })
   } catch (err) {
     console.error('[order-status] failed:', err)

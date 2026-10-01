@@ -11,6 +11,7 @@ type OrderStatus = {
   amount: { value: string; currency: string } | null
   paidAt: string | null
   email: string | null
+  hasDownload?: boolean
 }
 
 const copy = {
@@ -20,6 +21,8 @@ const copy = {
     paidTitle: 'Vielen Dank fuer Ihre Zahlung!',
     paidText:
       'Ihre Zahlung ist bestaetigt. Das Handbuch als PDF haben wir Ihnen soeben per E-Mail geschickt.',
+    paidTextNoDoc:
+      'Ihre Zahlung ist bestaetigt. Wir melden uns per E-Mail mit den naechsten Schritten.',
     pendingTitle: 'Die Zahlung wird noch verarbeitet',
     pendingText:
       'Sobald Mollie die Zahlung bestaetigt, senden wir Ihnen das Handbuch automatisch per E-Mail zu. Sie koennen diese Seite spaeter erneut aufrufen.',
@@ -78,7 +81,9 @@ function ThankYou() {
   const text = loading
     ? t.loadingText
     : isPaid
-      ? t.paidText
+      ? order?.hasDownload === false
+        ? t.paidTextNoDoc
+        : t.paidText
       : status === 'failed' || status === 'canceled' || status === 'expired'
         ? t.failedText
         : t.pendingText
@@ -121,13 +126,17 @@ function ThankYou() {
 
           {isPaid ? (
             <div className="thankyou-actions">
-              <a
-                className="button button-dark"
-                href={`/api/download?payment=${encodeURIComponent(order?.id || paymentId)}`}
-              >
-                {t.download} <span>↓</span>
-              </a>
-              <p className="thankyou-hint">{t.downloadHint}</p>
+              {order?.hasDownload !== false && (
+                <>
+                  <a
+                    className="button button-dark"
+                    href={`/api/download?payment=${encodeURIComponent(order?.id || paymentId)}`}
+                  >
+                    {t.download} <span>↓</span>
+                  </a>
+                  <p className="thankyou-hint">{t.downloadHint}</p>
+                </>
+              )}
             </div>
           ) : (
             <div className="thankyou-actions">
