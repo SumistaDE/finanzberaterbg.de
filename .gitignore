@@ -9,6 +9,9 @@ __v0_jsx-dev-runtime.ts
 # Environment variables
 .env*.local
 
+# Next.js generated types
+next-env.d.ts
+
 # Common ignores
 node_modules
 .next/
