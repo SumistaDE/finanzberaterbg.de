@@ -1,3 +1,0 @@
-import { NextResponse } from 'next/server'
-import { updateOrderStatus } from '@/lib/db'
-export async function POST(request: Request) { try { const { id } = await request.json() as { id?: string }; if (!id) return NextResponse.json({ error: 'Missing payment id' }, { status: 400 }); const response = await fetch(`https://api.mollie.com/v2/payments/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${process.env.MOLLIE_API_KEY}` } }); if (!response.ok) throw new Error('Could not verify payment'); const payment = await response.json(); await updateOrderStatus(id, payment.status); return NextResponse.json({ received: true }) } catch { return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 }) } }
