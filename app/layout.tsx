@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Lora } from 'next/font/google'
 import { LanguageProvider } from '@/lib/i18n'
 import './globals.css'
 
@@ -10,7 +10,9 @@ const sans = Inter({
   variable: '--font-sans',
 })
 
-const display = Playfair_Display({
+// Lora instead of Playfair Display: lower stroke contrast and a proper Cyrillic
+// face, so headings, prices and Bulgarian copy stay readable.
+const display = Lora({
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
   variable: '--font-display',
