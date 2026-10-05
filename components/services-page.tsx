@@ -16,36 +16,24 @@ function formatPrice(value: string) {
 
 const copy = {
   de: {
-    nav: ['Dienstleistungen', 'Vorteile', 'Kontakt'],
-    login: 'Anmelden',
-    toggle: 'BG',
     eyebrow: 'UNSERE LEISTUNGEN',
     title: <>Was wir fuer <em>Sie</em> tun.</>,
     intro:
       'Waehlen Sie eine Leistung. Jede wird von unseren Experten persoenlich begleitet.',
     view: 'Details ansehen',
     priceLabel: 'Einmalig',
-    footerLead: <>Ihre Energie. Ihre Entscheidung.</>,
-    navigation: 'Navigation',
-    contact: 'Kontakt',
-    weekdays: 'Mo–Fr, 9:00–18:00 Uhr',
-    home: 'Startseite',
+    badgeBeratung: 'Beratung',
+    badgeHandbuch: 'Handbuch',
   },
   bg: {
-    nav: ['Услуги', 'Предимства', 'Контакт'],
-    login: 'Вход',
-    toggle: 'DE',
     eyebrow: 'НАШИТЕ УСЛУГИ',
     title: <>Какво правим <em>за Вас.</em></>,
     intro:
       'Изберете услуга. Всяка се съпровожда лично от нашите експерти.',
     view: 'Вижте детайли',
     priceLabel: 'Еднократно',
-    footerLead: <>Вашата енергия. Вашето решение.</>,
-    navigation: 'Навигация',
-    contact: 'Контакт',
-    weekdays: 'Пн–Пт, 9:00–18:00 ч.',
-    home: 'Начало',
+    badgeBeratung: 'Консултация',
+    badgeHandbuch: 'Наръчник',
   },
 }
 
@@ -66,22 +54,36 @@ export function ServicesPage() {
           </div>
 
           <div className="service-list">
-            {products.map((product, i) => (
-              <Link
-                key={product.id}
-                href={`/produkt/${product.slug}`}
-                className="service-row"
-              >
-                <span>{String(i + 1).padStart(2, '0')}</span>
-                <h2>{lang === 'de' ? product.name : product.nameBg}</h2>
-                <p>{lang === 'de' ? product.tagline : product.taglineBg}</p>
-                <span className="service-price">
-                  {formatPrice(product.price)}
-                  <small>{t.priceLabel}</small>
-                </span>
-                <span className="row-arrow">↗</span>
-              </Link>
-            ))}
+            {products.map((product, i) => {
+              const isHandbook = product.slug.startsWith('naruchnik')
+              return (
+                <Link
+                  key={product.id}
+                  href={`/produkt/${product.slug}`}
+                  className="service-card"
+                >
+                  <div className="service-card-top">
+                    <span className="service-card-index">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="service-card-badge">
+                      {isHandbook ? t.badgeHandbuch : t.badgeBeratung}
+                    </span>
+                  </div>
+                  <h2>{lang === 'de' ? product.name : product.nameBg}</h2>
+                  <p>{lang === 'de' ? product.tagline : product.taglineBg}</p>
+                  <div className="service-card-bottom">
+                    <span className="service-price">
+                      {formatPrice(product.price)}
+                      <small>{t.priceLabel}</small>
+                    </span>
+                    <span className="service-card-cta">
+                      {t.view} <span>↗</span>
+                    </span>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </main>
