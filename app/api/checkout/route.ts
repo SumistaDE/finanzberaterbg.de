@@ -10,6 +10,8 @@ export async function POST(req: NextRequest) {
   const form = await req.formData()
   const slug = String(form.get('slug') || '')
   const email = String(form.get('email') || '').trim().toLowerCase()
+  const acceptedTerms = form.get('terms') === 'on'
+  const acceptedRevocation = form.get('revocation') === 'on'
 
   const product = getProduct(slug)
   if (!product) {
@@ -18,6 +20,15 @@ export async function POST(req: NextRequest) {
   if (!EMAIL_RE.test(email)) {
     return NextResponse.redirect(
       new URL(`/produkt/${slug}?error=email`, req.url),
+      303,
+    )
+  }
+  // § 356(5) BGB: the right of withdrawal for digital content only lapses if the
+  // customer expressly consented to immediate performance. Without this proof we
+  // must not start the payment.
+  if (!acceptedTerms || !acceptedRevocation) {
+    return NextResponse.redirect(
+      new URL(`/produkt/${slug}?error=consent`, req.url),
       303,
     )
   }
@@ -38,7 +49,15 @@ export async function POST(req: NextRequest) {
       description: product.name.slice(0, 255),
       redirectUrl: `${origin}/danke?payment=pending`,
       webhookUrl,
-      metadata: { productId: product.id, email },
+      metadata: {
+        productId: product.id,
+        email,
+        // Recorded as proof that the customer accepted the terms and the loss of
+        // the right of withdrawal for this digital product.
+        consentTerms: true,
+        consentRevocation: true,
+        consentAt: new Date().toISOString(),
+      },
     })
 
     // 2. Point the redirect at the real payment id, so the thank-you page can

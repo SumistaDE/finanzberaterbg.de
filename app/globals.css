@@ -67,6 +67,9 @@ em { font-family: var(--serif); font-weight: 400; color: var(--lime); }
 .buy-form label { color: var(--muted); font-size: 11px; }
 .buy-form input[type=email] { display: block; width: 100%; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 15px; outline: 0; font: 14px var(--sans); }
 .buy-form input[type=email]:focus { border-color: var(--lime); box-shadow: 0 0 0 2px rgba(200,244,91,.25); }
+.buy-form .consent { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); font-size: 11px; line-height: 1.6; cursor: pointer; }
+.buy-form .consent input[type=checkbox] { flex: 0 0 auto; width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--lime); cursor: pointer; }
+.buy-form .consent a { color: var(--lime); text-decoration: underline; }
 .buy-secure { margin: 14px 0 0; color: var(--muted); font-size: 11px; }
 .buy-bundle { margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; }
 .buy-bundle a { color: var(--lime); text-decoration: underline; }
