@@ -83,6 +83,8 @@ export const products: Product[] = [
       'Индивидуален план за оптимизация, изпратен по имейл след покупка',
     ],
     provider: 'Finanzberater BG',
+    manualFile: 'naruchnik-smart-meter.pdf',
+    manualLabel: 'Smart-Meter Ratgeber (PDF)',
     accent: '#c8f45b',
   },
   {
