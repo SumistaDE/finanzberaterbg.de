@@ -20,7 +20,9 @@ export async function sendManualEmail(params: {
 }): Promise<{ sent: boolean; skipped?: boolean; error?: string }> {
   const { to, paymentId, product } = params
   const apiKey = process.env.RESEND_API_KEY
-  const from = process.env.MAIL_FROM
+  // Fall back to the site's own contact address so mail never appears to come
+  // from the unrelated tarifberater24.de domain.
+  const from = process.env.MAIL_FROM || 'Finanzberater BG <info@finanzberaterbg.de>'
   const baseUrl = (process.env.BASE_URL || '').replace(/\/$/, '')
 
   if (!apiKey || !from) {

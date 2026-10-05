@@ -14,6 +14,7 @@ type OrderStatus = {
   paidAt: string | null
   email: string | null
   hasDownload?: boolean
+  productSlug?: string | null
 }
 
 const copy = {
@@ -166,7 +167,10 @@ function ThankYou() {
             </div>
           ) : (
             <div className="thankyou-actions">
-              <Link className="button button-dark" href="/produkt/tarifanalyse-smart-meter">
+              <Link
+                className="button button-dark"
+                href={`/produkt/${order?.productSlug || 'tarifanalyse-smart-meter'}`}
+              >
                 {t.retry}
               </Link>
             </div>

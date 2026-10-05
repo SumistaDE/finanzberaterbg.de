@@ -1,13 +1,13 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { getPayment } from '@/lib/mollie'
-import { getProduct } from '@/lib/products'
-import { sendManualEmail } from '@/lib/email'
+import { fulfilPaidOrder } from '@/lib/fulfill'
 
 export const runtime = 'nodejs'
 
 // Mollie calls this URL with application/x-www-form-urlencoded body: id=tr_...
-// We re-fetch the payment to get the authoritative status, then email the manual
-// once the payment is paid. Answering 200 quickly stops Mollie from retrying.
+// We re-fetch the payment to get the authoritative status, then deliver the
+// manual once the payment is paid. Answering 200 quickly stops Mollie from
+// retrying. Delivery is idempotent, so a retry never sends a second email.
 export async function POST(req: NextRequest) {
   let paymentId = ''
   try {
@@ -21,22 +21,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const payment = await getPayment(paymentId)
-
-    if (payment.status === 'paid' || payment.status === 'authorized') {
-      const metadata = (payment.metadata || {}) as {
-        email?: string
-        productId?: string
-      }
-      const product = metadata.productId ? getProduct(metadata.productId) : null
-      if (metadata.email && product) {
-        await sendManualEmail({
-          to: metadata.email,
-          paymentId: payment.id,
-          product,
-        })
-      }
-    }
-
+    await fulfilPaidOrder(paymentId)
     console.log('[webhook]', paymentId, '->', payment.status)
     return new NextResponse('OK', { status: 200 })
   } catch (err) {

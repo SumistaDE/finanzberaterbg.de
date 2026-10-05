@@ -1,13 +1,14 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { getPayment } from '@/lib/mollie'
 import { getProduct } from '@/lib/products'
-import { sendManualEmail } from '@/lib/email'
+import { fulfilPaidOrder } from '@/lib/fulfill'
 
 export const runtime = 'nodejs'
 
-// Called by the thank-you page to confirm the real payment status and to trigger
-// the manual email in case the webhook has not arrived yet (webhooks can be slower
-// than the customer redirect). Sending twice is harmless for a manual.
+// Called by the thank-you page to confirm the real payment status and to deliver
+// the manual in case the webhook has not arrived yet (webhooks can be slower than
+// the customer redirect). Delivery is idempotent, so this and the webhook cannot
+// send two emails for the same payment.
 export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get('payment') || ''
   if (!id) return NextResponse.json({ error: 'Missing payment id' }, { status: 400 })
@@ -19,19 +20,7 @@ export async function GET(req: NextRequest) {
       productId?: string
     }
 
-    if (
-      (payment.status === 'paid' || payment.status === 'authorized') &&
-      metadata.email
-    ) {
-      const product = metadata.productId ? getProduct(metadata.productId) : null
-      if (product) {
-        await sendManualEmail({
-          to: metadata.email,
-          paymentId: payment.id,
-          product,
-        })
-      }
-    }
+    await fulfilPaidOrder(id)
 
     const product = metadata.productId ? getProduct(metadata.productId) : null
 
@@ -44,6 +33,9 @@ export async function GET(req: NextRequest) {
       email: metadata.email || null,
       productId: metadata.productId || null,
       hasDownload: Boolean(product?.manualFile),
+      // The thank-you page uses this to send the customer back to the right
+      // product if they want to retry a failed payment.
+      productSlug: product?.slug || null,
     })
   } catch (err) {
     console.error('[order-status] failed:', err)

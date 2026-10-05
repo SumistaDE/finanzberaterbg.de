@@ -22,9 +22,6 @@ export function Header() {
           <Link href="/dienstleistungen">{t.navServices}</Link>
           <Link href="/#vorteile">{t.navBenefits}</Link>
           <Link href="/#kontakt">{t.navContact}</Link>
-          <Link href="/login" className="nav-login">
-            {t.login}
-          </Link>
           <button
             className="language-switch"
             onClick={toggle}
@@ -67,13 +64,14 @@ export function Footer() {
         <div>
           <h3>{t.navigation}</h3>
           <Link href="/dienstleistungen">{t.services}</Link>
-          <Link href="/login">{t.login}</Link>
+          <Link href="/#kontakt">{t.contact}</Link>
         </div>
         <div>
           <h3>{t.legal}</h3>
           <Link href="/impressum">{t.imprint}</Link>
           <Link href="/datenschutz">{t.privacy}</Link>
           <Link href="/agb">{t.terms}</Link>
+          <Link href="/widerruf">{t.revocation}</Link>
         </div>
         <div>
           <h3>{t.contact}</h3>
@@ -85,7 +83,7 @@ export function Footer() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© 2024 Finanzberater BG</span>
+        <span>© {new Date().getFullYear()} Finanzberater BG</span>
         <span>Made for better decisions.</span>
       </div>
     </footer>

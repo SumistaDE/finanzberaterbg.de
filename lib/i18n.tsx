@@ -35,7 +35,6 @@ export const common = {
     navServices: 'Dienstleistungen',
     navBenefits: 'Vorteile',
     navContact: 'Kontakt',
-    login: 'Anmelden',
     home: 'Startseite',
     toggle: 'BG',
     navigation: 'Navigation',
@@ -45,6 +44,7 @@ export const common = {
     imprint: 'Impressum',
     privacy: 'Datenschutz',
     terms: 'AGB',
+    revocation: 'Widerrufsbelehrung',
     services: 'Dienstleistungen',
     footerLead: (
       <>
@@ -58,7 +58,6 @@ export const common = {
     navServices: 'Услуги',
     navBenefits: 'Предимства',
     navContact: 'Контакт',
-    login: 'Вход',
     home: 'Начало',
     toggle: 'DE',
     navigation: 'Навигация',
@@ -68,6 +67,7 @@ export const common = {
     imprint: 'Импресум',
     privacy: 'Поверителност',
     terms: 'Общи условия',
+    revocation: 'Право на отказ',
     services: 'Услуги',
     footerLead: (
       <>

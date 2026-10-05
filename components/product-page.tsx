@@ -8,7 +8,6 @@ import { useLang } from '@/lib/i18n'
 const copy = {
   de: {
     nav: ['Dienstleistungen', 'Vorteile', 'Kontakt'],
-    login: 'Anmelden',
     toggle: 'BG',
     back: 'Zurueck',
     eyebrow: 'DIENSTLEISTUNG',
@@ -23,13 +22,21 @@ const copy = {
     orderNote: 'Nach dem Kauf senden wir Ihnen eine Bestellbestaetigung per E-Mail.',
     bundleLink: 'Alle 3 Teile als Komplettset (294 EUR)',
     secure: 'Sichere Zahlung ueber Mollie',
+    consentTerms:
+      'Ich habe die AGB und die Datenschutzerklaerung gelesen und akzeptiere sie.',
+    consentRevocation:
+      'Ich stimme der sofortigen Ausfuehrung zu und bestaetige, dass ich dadurch mein Widerrufsrecht verliere.',
+    terms: 'AGB',
+    privacy: 'Datenschutz',
+    revocation: 'Widerrufsbelehrung',
     errorEmail: 'Bitte geben Sie eine gueltige E-Mail-Adresse ein.',
     errorPayment:
       'Die Zahlung konnte nicht gestartet werden. Bitte versuchen Sie es erneut.',
+    errorConsent:
+      'Bitte bestaetigen Sie die AGB sowie den Verzicht auf das Widerrufsrecht.',
   },
   bg: {
     nav: ['Услуги', 'Предимства', 'Контакт'],
-    login: 'Вход',
     toggle: 'DE',
     back: 'Назад',
     eyebrow: 'УСЛУГА',
@@ -44,8 +51,17 @@ const copy = {
     orderNote: 'След покупката изпращаме потвърждение на поръчката на Вашия имейл.',
     bundleLink: 'И трите части като комплект (294 €)',
     secure: 'Сигурно плащане чрез Mollie',
+    consentTerms:
+      'Прочетох и приемам Общите условия и Декларацията за поверителност.',
+    consentRevocation:
+      'Съгласен/на съм с незабавното изпълнение и потвърждавам, че с това губя правото си на отказ.',
+    terms: 'Общи условия',
+    privacy: 'Поверителност',
+    revocation: 'Право на отказ',
     errorEmail: 'Моля, въведете валиден имейл адрес.',
     errorPayment: 'Плащането не можа да стартира. Моля, опитайте отново.',
+    errorConsent:
+      'Моля, потвърдете Общите условия и отказа от правото на отказ.',
   },
 }
 
@@ -103,6 +119,7 @@ export function ProductPage({
 
                 {error === 'email' && <p className="buy-error">{t.errorEmail}</p>}
                 {error === 'payment' && <p className="buy-error">{t.errorPayment}</p>}
+                {error === 'consent' && <p className="buy-error">{t.errorConsent}</p>}
 
                 <form method="POST" action="/api/checkout" className="buy-form">
                   <input type="hidden" name="slug" value={product.slug} />
@@ -115,6 +132,21 @@ export function ProductPage({
                     placeholder={t.emailPlaceholder}
                     autoComplete="email"
                   />
+                  <label className="consent">
+                    <input type="checkbox" name="terms" required />
+                    <span>
+                      {t.consentTerms}{' '}
+                      <Link href="/agb">{t.terms}</Link>,{' '}
+                      <Link href="/datenschutz">{t.privacy}</Link>.
+                    </span>
+                  </label>
+                  <label className="consent">
+                    <input type="checkbox" name="revocation" required />
+                    <span>
+                      {t.consentRevocation}{' '}
+                      <Link href="/widerruf">{t.revocation}</Link>.
+                    </span>
+                  </label>
                   <button type="submit" className="button button-dark full">
                     {t.buy} <span>↗</span>
                   </button>

@@ -1,7 +1,7 @@
 import { SitePage } from '../page'
 import { LegalPage } from '@/components/legal-page'
 
-const LEGAL = new Set(['impressum', 'datenschutz', 'agb'])
+const LEGAL = new Set(['impressum', 'datenschutz', 'agb', 'widerruf'])
 
 export default async function CatchAllPage({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params
